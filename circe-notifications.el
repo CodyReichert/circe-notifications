@@ -144,12 +144,9 @@ notification."
 (defun circe-notifications-notify (nick body)
   "Show a desktop notification with title NICK and body BODY."
   (if (string-equal circe-notifications-backend "notify-send")
-      (call-process "/bin/bash" nil 0 nil
-                    (concat
-                     "notify-send "
-                     nick " "
-                     body))))
-                    
+      (call-process "notify-send" nil 0 nil
+                    nick body "-i" "circe.png")))
+
 (defun circe-not-getting-spammed-by (nick)
   "Return an alist with NICKs that have triggered notifications in the last
 `circe-notifications-wait-for' seconds, or nil if it has been less than
